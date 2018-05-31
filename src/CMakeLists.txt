@@ -9,6 +9,7 @@ set(GOTCHA_SOURCES
   tool.c 
   library_filters.c
   gotcha_dl.c
+  translations.c
 )
 
 add_library(gotcha SHARED ${GOTCHA_SOURCES})
@@ -28,6 +29,8 @@ set_target_properties(gotcha_no_libc PROPERTIES LINK_FLAGS "-fvisibility=${DEFAU
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-install(TARGETS gotcha DESTINATION ${CMAKE_INSTALL_LIBDIR} EXPORT gotcha) 
-install(EXPORT gotcha DESTINATION cmake/gotcha) 
+
+install(TARGETS gotcha EXPORT gotcha-targets DESTINATION ${CMAKE_INSTALL_LIBDIR}) 
+install(EXPORT gotcha-targets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/gotcha)
+
 add_subdirectory(example)
